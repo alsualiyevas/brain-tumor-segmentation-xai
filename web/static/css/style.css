@@ -1,0 +1,134 @@
+/* Radiology-viewer chrome that Tailwind's CDN build can't express:
+   corner-bracket frames, readout ticks, dialog skin, focus rings, motion. */
+
+:root {
+  --ink: #0a0c0e;
+  --panel: #14171b;
+  --panel-2: #1b1f24;
+  --line: #262b31;
+  --film: #dfe3e8;
+  --mute: #7b8290;
+  --finding: #e8543c;
+}
+
+* {
+  scrollbar-color: var(--line) var(--ink);
+}
+
+body {
+  background: var(--ink);
+  color: var(--film);
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* Viewport bracket frame — the site's one recurring signature device.
+   Wraps every piece of inspectable imagery (samples, results, gallery, diagrams). */
+.viewport {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.viewport::before,
+.viewport::after,
+.viewport > .vp-tr,
+.viewport > .vp-bl {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+.viewport::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--mute);
+  border-left: 2px solid var(--mute);
+}
+
+.viewport::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--mute);
+  border-right: 2px solid var(--mute);
+}
+
+.viewport > .vp-tr {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--mute);
+  border-right: 2px solid var(--mute);
+}
+
+.viewport > .vp-bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--mute);
+  border-left: 2px solid var(--mute);
+}
+
+.viewport:hover::before,
+.viewport:hover::after,
+.viewport:hover > .vp-tr,
+.viewport:hover > .vp-bl,
+.viewport.is-active::before,
+.viewport.is-active::after,
+.viewport.is-active > .vp-tr,
+.viewport.is-active > .vp-bl,
+.viewport.selected::before,
+.viewport.selected::after,
+.viewport.selected > .vp-tr,
+.viewport.selected > .vp-bl {
+  border-color: var(--finding);
+}
+
+.readout-strip {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent 48px
+  );
+  background-position: 0 100%;
+  background-size: 100% 4px;
+  background-repeat: no-repeat;
+}
+
+dialog#lightbox {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--film);
+  max-width: 92vw;
+  padding: 0;
+}
+
+dialog#lightbox::backdrop {
+  background: rgba(5, 6, 7, 0.86);
+}
+
+:focus-visible {
+  outline: 2px solid var(--finding);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

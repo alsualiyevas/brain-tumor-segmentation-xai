@@ -1,0 +1,31 @@
+# Custom Project Exclusions
+.vscode/
+.idea/
+dataset/
+png_dataset/
+*.pt
+*.pth
+
+# Jupyter Notebook & Checkpoints
+.ipynb_checkpoints/
+
+# Python Byte-compiled & Cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+
+# Logs & Testing
+*.log
+.pytest_cache/
+.mypy_cache/
